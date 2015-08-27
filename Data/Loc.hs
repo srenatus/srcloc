@@ -64,7 +64,9 @@ data Pos = -- | Source file name, line, column, and character offset.
 
 instance Ord Pos where
     compare (Pos f1 l1 c1 _) (Pos f2 l2 c2 _) =
-        compare (f1, l1, c1) (f2, l2, c2)
+        if f1 == f2
+          then compare (l1, c1) (l2, c2)
+          else undefined
 
 -- | Position file.
 posFile :: Pos -> FilePath
